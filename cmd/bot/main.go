@@ -5,11 +5,14 @@ import (
 	"os"
 	"time"
 
-	"github.com/HayKor/golang_tgbot/pkg/config"
+	config "github.com/HayKor/golang_tgbot/pkg/config"
+	handlers "github.com/HayKor/golang_tgbot/pkg/handlers"
 	tele "gopkg.in/telebot.v4"
 )
 
 func main() {
+	slog.SetLogLoggerLevel(slog.LevelDebug)
+
 	config.SetDotEnv()
 	pref := tele.Settings{
 		Token:  os.Getenv("BOT_TOKEN"),
@@ -24,9 +27,7 @@ func main() {
 		slog.Info("Started new bot.")
 	}
 
-	b.Handle("/hello", func(c tele.Context) error {
-		return c.Send("Hello!")
-	})
+	handlers.SetUpHandlers(b)
 
 	b.Start()
 
