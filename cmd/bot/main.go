@@ -15,8 +15,9 @@ func main() {
 
 	config.SetDotEnv()
 	pref := tele.Settings{
-		Token:  os.Getenv("BOT_TOKEN"),
-		Poller: &tele.LongPoller{Timeout: 10 * time.Second},
+		ParseMode: tele.ModeHTML,
+		Token:     os.Getenv("BOT_TOKEN"),
+		Poller:    &tele.LongPoller{Timeout: 10 * time.Second},
 	}
 
 	b, err := tele.NewBot(pref)
