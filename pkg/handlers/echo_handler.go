@@ -10,7 +10,8 @@ func SetUpEchoHandler(b *tele.Bot) {
 	g.Use(middlewares.Logger())
 
 	g.Handle(tele.OnText, func(c tele.Context) error {
-		return c.Send(c.Message().Text)
+		msg := "<b>From " + c.Message().Sender.FirstName + "</b>:\n" + c.Message().Text
+		return c.Send(msg)
 	})
 
 	g.Handle(tele.OnPhoto, func(c tele.Context) error {
